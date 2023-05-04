@@ -7,10 +7,11 @@ import (
 	"fmt"
 	"time"
 
+	"main/clock"
+	"main/config"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/taiti09/go_app_handson/clock"
-	"github.com/taiti09/go_app_handson/config"
 )
 
 type Beginner interface {

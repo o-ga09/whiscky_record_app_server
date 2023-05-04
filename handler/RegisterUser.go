@@ -2,10 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"main/entity"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/taiti09/go_app_handson/entity"
 )
 
 type RegisterUser struct {
@@ -16,9 +16,7 @@ type RegisterUser struct {
 func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	var b struct {
-		Name string `json:"name" validate:"required"`
-		Password string `json:"password" validate:"required"`
-		Role string `json:"role" validate:"required"`
+		Userid string `json:"user_id" validate:"required"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
@@ -32,7 +30,7 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		},http.StatusBadRequest)
 	}
 
-	u, err := ru.Service.RegisterUser(ctx,b.Name,b.Password,b.Role)
+	u, err := ru.Service.RegisterUser(ctx,b.Userid)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
@@ -40,7 +38,7 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	rsp := struct {
-		ID entity.UserID `json:"id"`
+		ID entity.UserID `json:"user_id"`
 	}{ID: u.ID}
 	RespondJSON(ctx,w,rsp,http.StatusOK)
 }

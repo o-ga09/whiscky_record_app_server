@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/taiti09/go_app_handson/auth"
+	"main/auth"
 )
 
 func Authmiddleware(j *auth.JWTer) func(next http.Handler) http.Handler {

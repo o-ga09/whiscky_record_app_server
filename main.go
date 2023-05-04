@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/taiti09/go_app_handson/config"
+	"main/config"
 )
 
 

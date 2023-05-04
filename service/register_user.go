@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/taiti09/go_app_handson/entity"
-	"github.com/taiti09/go_app_handson/store"
+	"main/entity"
+	"main/store"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -14,15 +15,13 @@ type RegisterUser struct {
 	Repo UserRegister
 }
 
-func (r *RegisterUser) RegisterUser(ctx context.Context, name string, password string, role string) (*entity.User, error) {
-	pw ,err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+func (r *RegisterUser) RegisterUser(ctx context.Context, user_id string) (*entity.User, error) {
+	uid ,err := bcrypt.GenerateFromPassword([]byte(user_id), bcrypt.DefaultCost)
 	if err != nil {
 		return nil,fmt.Errorf("cannot hash password: %w",err)
 	}
 	u := &entity.User{
-		Name: name,
-		Password: string(pw),
-		Role: role,
+		User_ID: string(uid),
 	}
 
 	if err := r.Repo.RegisterUser(ctx, r.DB, u); err != nil {

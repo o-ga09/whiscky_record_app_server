@@ -35,7 +35,7 @@ help:
 			awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 migrate:
-	mysqldef -u todo -p P@ssw0rd -h 127.0.0.1 -P 33306 todo < ./_tools/mysql/schema.sql
+	mysqldef -u todo -p P@ssw0rd -h 127.0.0.1 -P 3306 todo < ./_tools/mysql/schema.sql
 
 dry-migrate:
 	mysqldef -u todo -p P@ssw0rd -h 127.0.0.1 -P 33306 todo --dry-run < ./_tools/mysql/schema.sql
