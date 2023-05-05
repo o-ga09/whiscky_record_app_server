@@ -14,3 +14,11 @@ type RegisterUserService interface {
 type LoginService interface {
 	Login(ctx context.Context, uid string) (string, error)
 }
+
+type RecordWhickyService interface {
+	RecordWhicky(ctx context.Context,uid entity.UserID, name string,imageurl string) (string,error)
+}
+
+type GetWhickyService interface {
+	GetRecord(ctx context.Context,uid entity.UserID) (*entity.WhickyRecord,error)
+}
