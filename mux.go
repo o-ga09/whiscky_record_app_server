@@ -42,6 +42,18 @@ func NewMux(ctx context.Context, cfg *config.Config) (http.Handler, func(), erro
 		Validator: v,
 	}
 	mux.Post("/register",ru.ServeHTTP)
+
+	rw := &handler.RecordWhicky{
+		Service: &service.RecordWhicky{DB: db, Repo: &r},
+		Validator: v,
+	}
+	mux.Post("/record",rw.ServeHTTP)
+
+	gr := &handler.GetRecord{
+		Service: &service.GetRecord{DB: db,Repo: &r},
+		Validator: v,
+	}
+	mux.Post("/get",gr.ServeHTTP)
 	return mux, cleanup, nil
 }
 
