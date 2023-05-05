@@ -19,3 +19,11 @@ type UserGetter interface {
 type TokenGenerator interface {
 	GenerateToken(ctx context.Context, u entity.User) ([]byte, error)
 }
+
+type WhickyRegister interface {
+	RegisterWhicky(ctx context.Context,db store.Execer,record *entity.WhickyRecord) error
+}
+
+type RecordGetter interface {
+	GetWhickyRecord(ctx context.Context,db store.Queryer,uid entity.UserID) (*entity.WhickyRecord,error)
+}
