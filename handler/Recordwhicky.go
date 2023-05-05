@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"main/entity"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -16,9 +15,9 @@ type RecordWhicky struct {
 func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 	ctx := r.Context()
 	var b struct {
-		Uid entity.UserID `json:"uid" validate:"require"`
-		Name string `json:"name" validate:"require"`
-		ImageURL string `json:"image" validate:"require"`
+		Uid string `json:"uid" validate:"required"`
+		Name string `json:"name" validate:"required"`
+		ImageURL string `json:"image" validate:"required"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {

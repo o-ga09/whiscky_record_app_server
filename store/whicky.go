@@ -24,7 +24,7 @@ func (r *Repository) RegisterWhicky(ctx context.Context,db Execer,record *entity
 	return nil
 }
 
-func (r *Repository) GetWhickyRecord(ctx context.Context,db Queryer,uid entity.UserID) (*entity.WhickyRecord, error) {
+func (r *Repository) GetWhickyRecord(ctx context.Context,db Queryer,uid string) (*entity.WhickyRecord, error) {
 	record := &entity.WhickyRecord{}
 	sql := `SELECT user_id,whisky_name,drankAt,imageUrl FROM whicky_record WHERE user_id = ?`
 	if err := db.GetContext(ctx,record,sql,uid); err != nil {

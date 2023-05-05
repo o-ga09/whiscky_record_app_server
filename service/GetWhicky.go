@@ -12,7 +12,7 @@ type GetRecord struct {
 	Repo RecordGetter
 }
 
-func (gw *GetRecord) GetRecord(ctx context.Context,uid entity.UserID) (*entity.WhickyRecord,error) {
+func (gw *GetRecord) GetRecord(ctx context.Context,uid string) (*entity.WhickyRecord,error) {
 	record,err := gw.Repo.GetWhickyRecord(ctx,gw.DB,uid)
 	if err != nil {
 		return nil,fmt.Errorf("faild to get record")

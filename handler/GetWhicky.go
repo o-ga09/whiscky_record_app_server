@@ -16,7 +16,7 @@ type GetRecord struct {
 func (gw *GetRecord) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	var b struct {
-		Uid entity.UserID `json:"uid" validate:"require"`
+		Uid string `json:"uid" validate:"required"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
@@ -30,7 +30,7 @@ func (gw *GetRecord) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Message: err.Error(),
 		},http.StatusBadRequest)
 	}
-
+	
 	record,err := gw.Service.GetRecord(ctx,b.Uid)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{

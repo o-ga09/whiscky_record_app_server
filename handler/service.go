@@ -16,9 +16,9 @@ type LoginService interface {
 }
 
 type RecordWhickyService interface {
-	RecordWhicky(ctx context.Context,uid entity.UserID, name string,imageurl string) (string,error)
+	RecordWhicky(ctx context.Context,uid string, name string,imageurl string) (string,error)
 }
 
 type GetWhickyService interface {
-	GetRecord(ctx context.Context,uid entity.UserID) (*entity.WhickyRecord,error)
+	GetRecord(ctx context.Context,uid string) (*entity.WhickyRecord,error)
 }

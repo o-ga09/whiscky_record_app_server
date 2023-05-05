@@ -12,7 +12,7 @@ type RecordWhicky struct {
 	Repo WhickyRegister
 }
 
-func (rw *RecordWhicky) RecordWhicky(ctx context.Context,uid entity.UserID,name string,imageURL string) (string,error) {
+func (rw *RecordWhicky) RecordWhicky(ctx context.Context,uid string,name string,imageURL string) (string,error) {
 	record := &entity.WhickyRecord{
 		UserID: uid,
 		Name: name,
