@@ -39,7 +39,7 @@ func (gw *GetRecord) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	rsp := struct {
-		Result *entity.WhickyRecord `json:"result"`
+		Result *[]entity.WhickyRecord `json:"result"`
 	}{Result: record}
 	RespondJSON(ctx,w,rsp,http.StatusOK)
 }

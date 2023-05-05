@@ -20,5 +20,5 @@ type RecordWhickyService interface {
 }
 
 type GetWhickyService interface {
-	GetRecord(ctx context.Context,uid string) (*entity.WhickyRecord,error)
+	GetRecord(ctx context.Context,uid string) (*[]entity.WhickyRecord,error)
 }

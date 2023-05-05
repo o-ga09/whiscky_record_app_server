@@ -7,7 +7,7 @@ CREATE TABLE `user`
     PRIMARY KEY (`id`)
 ) Engine=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ユーザー';
 
-CREATE TABLE `whisky_record` (
+CREATE TABLE `whicky_record` (
   `user_id` BIGINT UNSIGNED NOT NULL,
   `whisky_name` VARCHAR(255) NOT NULL,
   `drankAt` DATE NOT NULL,

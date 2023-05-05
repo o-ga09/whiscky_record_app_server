@@ -25,5 +25,5 @@ type WhickyRegister interface {
 }
 
 type RecordGetter interface {
-	GetWhickyRecord(ctx context.Context,db store.Queryer,uid string) (*entity.WhickyRecord,error)
+	GetWhickyRecord(ctx context.Context,db store.Queryer,uid string) (*[]entity.WhickyRecord,error)
 }
