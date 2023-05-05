@@ -1,2 +1,4 @@
 tmp/
 _tool/mysql/conf.d/
+*.json
+.vscode/

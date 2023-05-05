@@ -2,12 +2,12 @@ package service
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
 
+	"main/auth"
 	"main/entity"
 	"main/store"
-
-	"golang.org/x/crypto/bcrypt"
 )
 
 type RegisterUser struct {
@@ -16,10 +16,12 @@ type RegisterUser struct {
 }
 
 func (r *RegisterUser) RegisterUser(ctx context.Context, user_id string) (*entity.User, error) {
-	uid ,err := bcrypt.GenerateFromPassword([]byte(user_id), bcrypt.DefaultCost)
+	token,err := auth.GetUserInfo(ctx,user_id)
 	if err != nil {
-		return nil,fmt.Errorf("cannot hash password: %w",err)
+		return nil,fmt.Errorf("cannot get user info: %w",err)
 	}
+
+	uid := base64.StdEncoding.EncodeToString([]byte(token))
 	u := &entity.User{
 		User_ID: string(uid),
 	}

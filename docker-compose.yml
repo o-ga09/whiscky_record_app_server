@@ -13,6 +13,7 @@ services:
       TODO_DB_USER: todo
       TODO_DB_PASSWORD: P@ssw0rd
       TODO_DB_NAME: todo
+      GOOGLE_APPLICATION_CREDENTIALS: "./auth/cert/app-20230414-b72e23782368.json"
     volumes:
       - .:/app
     ports:

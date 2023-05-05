@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"main/entity"
 	"net/http"
@@ -16,7 +17,7 @@ type RegisterUser struct {
 func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	var b struct {
-		Userid string `json:"user_id" validate:"required"`
+		Userid string `json:"token" validate:"required"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
@@ -30,7 +31,14 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		},http.StatusBadRequest)
 	}
 
-	u, err := ru.Service.RegisterUser(ctx,b.Userid)
+	token, err := base64.StdEncoding.DecodeString(b.Userid)
+	if err != nil {
+		RespondJSON(ctx,w,&ErrResponse{
+			Message: err.Error(),
+		},http.StatusInternalServerError)
+		return
+	}
+	u, err := ru.Service.RegisterUser(ctx,string(token))
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
