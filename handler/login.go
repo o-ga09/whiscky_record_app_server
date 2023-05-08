@@ -62,7 +62,7 @@ func (l *Login) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	status, err := l.Service.Login(ctx,uid)
+	id, err := l.Service.Login(ctx,uid)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
@@ -71,9 +71,9 @@ func (l *Login) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	rsp := struct {
-		Status string `json:"status" validate:"required"`
+		Id string `json:"user_id" validate:"required"`
 	}{
-		Status: status,
+		Id: id,
 	}
 
 	RespondJSON(ctx,w,rsp,http.StatusOK)

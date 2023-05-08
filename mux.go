@@ -18,6 +18,10 @@ import (
 
 func NewMux(ctx context.Context, cfg *config.Config) (http.Handler, func(), error) {
 	mux := chi.NewRouter()
+
+    // CORS設定
+	mux.Use(Cors)
+
 	mux.HandleFunc("/health", HealthCheckHandler)
 	v := validator.New()
 	db, cleanup, err := store.New(ctx,cfg)
@@ -60,4 +64,19 @@ func NewMux(ctx context.Context, cfg *config.Config) (http.Handler, func(), erro
 func HealthCheckHandler(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-type","application/json; charset=utf-8")
 	_, _ = w.Write([]byte(`{"status": "ok"}`))
+}
+
+func Cors(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Access-Control-Allow-Origin", "*")
+        w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+        w.Header().Set("ExposedHeaders", "Link")
+        w.Header().Set("Access-Control-Allow-Credentials", "true")
+
+        if r.Method == "OPTIONS" {
+            return
+        }
+        next.ServeHTTP(w, r)
+    })
 }
