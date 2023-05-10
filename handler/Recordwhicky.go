@@ -18,7 +18,7 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 		Uid string `json:"uid" validate:"required"`
 		Name string `json:"name" validate:"required"`
 		Evaluate string `json:"evaluate" validate:"required"`
-		ImageURL string `json:"image" validate:"required"`
+		ImageURL string `json:"imageURL"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
@@ -27,13 +27,14 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 		},http.StatusInternalServerError)
 		return
 	}
+	
 	if err := rw.Validator.Struct(b); err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
 		},http.StatusBadRequest)
 	}
 
-	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.evaluate,b.ImageURL)
+	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.Evaluate,b.ImageURL)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
