@@ -14,7 +14,7 @@ func (r *Repository) RegisterWhicky(ctx context.Context,db Execer,record *entity
 	record.DrankAt = r.Clocker.Now()
 
 	sql := `INSERT INTO whicky_record (user_id,whisky_name,drankAt,evaluate, imageUrl) VALUES (?,?,?,?,?)`
-	_, err := db.ExecContext(ctx,sql,record.UserID,record.Name,record.DrankAt,record.evaluate, record.ImageURL)
+	_, err := db.ExecContext(ctx,sql,record.UserID,record.Name,record.DrankAt,record.Evaluate, record.ImageURL)
 	if err != nil {
 		var mysqlErr *mysql.MySQLError
 		if errors.As(err,&mysqlErr) && mysqlErr.Number == ErrCodeMYSQLDuplicateEntry {
@@ -41,7 +41,7 @@ func (r *Repository) GetWhickyRecord(ctx context.Context,db Queryer,uid string) 
             &record.UserID,
             &record.Name,
             &record.DrankAt,
-			&record.evaluate,
+			&record.Evaluate,
             &record.ImageURL,
         )
 
