@@ -11,6 +11,7 @@ CREATE TABLE `whicky_record` (
   `user_id` BIGINT UNSIGNED NOT NULL,
   `whisky_name` VARCHAR(255) NOT NULL,
   `drankAt` DATE NOT NULL,
+  `evaluate` VARCHAR(10),
   `imageUrl` VARCHAR(255),
   CONSTRAINT `fk_user_id`
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)

@@ -17,6 +17,7 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 	var b struct {
 		Uid string `json:"uid" validate:"required"`
 		Name string `json:"name" validate:"required"`
+		evaluate string `json:"evaluate" validate:"required"`
 		ImageURL string `json:"image" validate:"required"`
 	}
 
