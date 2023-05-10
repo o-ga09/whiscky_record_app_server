@@ -12,10 +12,11 @@ type RecordWhicky struct {
 	Repo WhickyRegister
 }
 
-func (rw *RecordWhicky) RecordWhicky(ctx context.Context,uid string,name string,imageURL string) (string,error) {
+func (rw *RecordWhicky) RecordWhicky(ctx context.Context,uid string,name string,evaluate string, imageURL string) (string,error) {
 	record := &entity.WhickyRecord{
 		UserID: uid,
 		Name: name,
+		Evaluate: evaluate,
 		ImageURL: imageURL,
 	}
 	if err := rw.Repo.RegisterWhicky(ctx,rw.DB,record);err != nil {

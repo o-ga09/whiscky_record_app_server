@@ -17,7 +17,7 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 	var b struct {
 		Uid string `json:"uid" validate:"required"`
 		Name string `json:"name" validate:"required"`
-		evaluate string `json:"evaluate" validate:"required"`
+		Evaluate string `json:"evaluate" validate:"required"`
 		ImageURL string `json:"image" validate:"required"`
 	}
 
@@ -33,7 +33,7 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 		},http.StatusBadRequest)
 	}
 
-	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.ImageURL)
+	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.evaluate,b.ImageURL)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
