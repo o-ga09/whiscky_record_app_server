@@ -1,19 +1,20 @@
 CREATE TABLE `user`
 (
-    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ユーザーの識別子',
-    `user_id` VARCHAR(80) NOT NULL COMMENT 'ユーザー名のuid',
+    `user_id` VARCHAR(32) NOT NULL COMMENT 'ユーザー名のuuid',
     `created_at` DATETIME(6) NOT NULL COMMENT 'ユーザー登録日時',
     `modified_at` DATETIME(6) NOT NULL COMMENT 'ユーザーログイン日時',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`user_id`)
 ) Engine=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ユーザー';
 
 CREATE TABLE `whicky_record` (
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `user_id` VARCHAR(32) NOT NULL,
   `whisky_name` VARCHAR(255) NOT NULL,
   `drankAt` DATE NOT NULL,
+  `taste` VARCHAR(255),
+  `smell` VARCHAR(255),
   `evaluate` VARCHAR(10),
   `imageUrl` VARCHAR(255),
   CONSTRAINT `fk_user_id`
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
       ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

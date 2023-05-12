@@ -12,7 +12,6 @@ require (
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lestrrat-go/jwx/v2 v2.0.9
 	github.com/taiti09/go_app_handson v0.0.0-20221109140606-125d109e6d69
-	golang.org/x/crypto v0.7.0
 	golang.org/x/sync v0.1.0
 )
 
@@ -44,6 +43,7 @@ require (
 	github.com/lestrrat-go/iter v1.0.2 // indirect
 	github.com/lestrrat-go/option v1.0.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
+	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/net v0.9.0 // indirect
 	golang.org/x/oauth2 v0.7.0 // indirect
 	golang.org/x/sys v0.7.0 // indirect

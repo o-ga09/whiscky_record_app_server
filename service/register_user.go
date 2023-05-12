@@ -8,6 +8,8 @@ import (
 	"main/auth"
 	"main/entity"
 	"main/store"
+
+	"github.com/google/uuid"
 )
 
 type RegisterUser struct {
@@ -22,8 +24,12 @@ func (r *RegisterUser) RegisterUser(ctx context.Context, user_id string) (*entit
 	}
 
 	uid := base64.StdEncoding.EncodeToString([]byte(token))
+	uuid, err := uuid.Parse(uid)
+	if err != err {
+		return nil,err
+	}
 	u := &entity.User{
-		User_ID: string(uid),
+		User_ID: entity.UserID(uuid),
 	}
 
 	if err := r.Repo.RegisterUser(ctx, r.DB, u); err != nil {

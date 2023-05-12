@@ -19,5 +19,5 @@ func (l *Login) Login(ctx context.Context, uid string) (string,error) {
 		return "", fmt.Errorf("failed to list: %w",err)
 	}
 
-	return fmt.Sprint(u.ID),nil
+	return fmt.Sprint(u.User_ID),nil
 }
