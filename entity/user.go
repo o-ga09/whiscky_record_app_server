@@ -2,11 +2,9 @@ package entity
 
 import (
 	"time"
-
-	"github.com/google/uuid"
 )
 
-type UserID uuid.UUID
+type UserID string
 
 type User struct {
 	User_ID UserID `json:"user_id" db:"user_id"`

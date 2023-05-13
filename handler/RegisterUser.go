@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/base64"
 	"encoding/json"
+	"log"
 	"main/entity"
 	"net/http"
 
@@ -40,6 +41,7 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	u, err := ru.Service.RegisterUser(ctx,string(token))
 	if err != nil {
+		log.Print(err)
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
 		},http.StatusInternalServerError)
