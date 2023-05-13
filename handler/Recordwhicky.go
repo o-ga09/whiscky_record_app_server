@@ -18,6 +18,8 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 		Uid string `json:"uid" validate:"required"`
 		Name string `json:"name" validate:"required"`
 		Evaluate string `json:"evaluate" validate:"required"`
+		Taste string `json:"taste" validate:"required"`
+		Smell string `json:"smell" validate:"required"`
 		ImageURL string `json:"imageURL"`
 	}
 
@@ -34,7 +36,7 @@ func (rw *RecordWhicky) ServeHTTP(w http.ResponseWriter,r *http.Request) {
 		},http.StatusBadRequest)
 	}
 
-	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.Evaluate,b.ImageURL)
+	status, err := rw.Service.RecordWhicky(ctx,b.Uid,b.Name,b.Evaluate,b.Taste,b.Smell,b.ImageURL)
 	if err != nil {
 		RespondJSON(ctx,w,&ErrResponse{
 			Message: err.Error(),
