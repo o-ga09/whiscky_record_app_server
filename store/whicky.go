@@ -13,8 +13,8 @@ import (
 func (r *Repository) RegisterWhicky(ctx context.Context,db Execer,record *entity.WhickyRecord) error {
 	record.DrankAt = r.Clocker.Now()
 
-	sql := `INSERT INTO whicky_record (user_id,whisky_name,drankAt,evaluate, imageUrl) VALUES (?,?,?,?,?)`
-	_, err := db.ExecContext(ctx,sql,record.UserID,record.Name,record.DrankAt,record.Evaluate, record.ImageURL)
+	sql := `INSERT INTO whicky_record (user_id,whisky_name,drankAt,taste,smell,evaluate, imageUrl) VALUES (?,?,?,?,?,?,?)`
+	_, err := db.ExecContext(ctx,sql,record.UserID,record.Name,record.DrankAt,record.Taste,record.Smell,record.Evaluate, record.ImageURL)
 	if err != nil {
 		var mysqlErr *mysql.MySQLError
 		if errors.As(err,&mysqlErr) && mysqlErr.Number == ErrCodeMYSQLDuplicateEntry {
@@ -27,7 +27,7 @@ func (r *Repository) RegisterWhicky(ctx context.Context,db Execer,record *entity
 
 func (r *Repository) GetWhickyRecord(ctx context.Context,db Queryer,uid string) (*[]entity.WhickyRecord, error) {
 	records := make([]entity.WhickyRecord, 0)
-	sql := `SELECT user_id,whisky_name,drankAt,evaluate,imageUrl FROM whicky_record WHERE user_id = ?`
+	sql := `SELECT user_id,whisky_name,drankAt,taste,smell,evaluate,imageUrl FROM whicky_record WHERE user_id = ?`
 	rows,err := db.QueryxContext(ctx,sql,uid)
 	if err != nil {
 		return nil,err
@@ -41,6 +41,8 @@ func (r *Repository) GetWhickyRecord(ctx context.Context,db Queryer,uid string) 
             &record.UserID,
             &record.Name,
             &record.DrankAt,
+			&record.Taste,
+			&record.Smell,
 			&record.Evaluate,
             &record.ImageURL,
         )
