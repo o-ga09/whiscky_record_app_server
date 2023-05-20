@@ -8,11 +8,11 @@ services:
     environment:
       TODO_ENV: prod
       PORT: 8080
-      TODO_DB_HOST: tododb01
+      TODO_DB_HOST: aws.connect.psdb.cloud
       TODO_DB_PORT: 3306
-      TODO_DB_USER: todo
-      TODO_DB_PASSWORD: P@ssw0rd
-      TODO_DB_NAME: todo
+      TODO_DB_USER: e1g66om8rgth5j6kecfc
+      TODO_DB_PASSWORD: pscale_pw_kQbEwJmaKhYGSeGgVeOxQi3dUYOvJt2PPkAff8k1ktF
+      TODO_DB_NAME: appdb01
       GOOGLE_APPLICATION_CREDENTIALS: "./auth/cert/app-20230414-b72e23782368.json"
     volumes:
       - .:/app

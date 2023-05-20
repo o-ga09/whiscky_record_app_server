@@ -68,7 +68,7 @@ func HealthCheckHandler(w http.ResponseWriter, req *http.Request) {
 
 func Cors(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        w.Header().Set("Access-Control-Allow-Origin", "*")
+        w.Header().Set("Access-Control-Allow-Origin", "https://app-20230414.firebaseapp.com/")
         w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
         w.Header().Set("ExposedHeaders", "Link")
