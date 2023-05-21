@@ -2,13 +2,17 @@ package auth
 
 import (
 	"context"
+	"os"
 
 	firebase "firebase.google.com/go"
+	"google.golang.org/api/option"
 )
 
 func GetUserInfo(ctx context.Context, token string) (string, error) {
     // Firebase Admin SDKの初期化
-    app, err := firebase.NewApp(ctx, nil)
+    opt := option.WithCredentialsJSON([]byte(os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")))
+
+    app, err := firebase.NewApp(ctx, nil, opt)
     if err != nil {
         return "", err
     }
