@@ -13,6 +13,7 @@ require (
 	github.com/lestrrat-go/jwx/v2 v2.0.9
 	github.com/taiti09/go_app_handson v0.0.0-20221109140606-125d109e6d69
 	golang.org/x/sync v0.1.0
+	google.golang.org/api v0.121.0
 )
 
 require (
@@ -50,7 +51,6 @@ require (
 	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/time v0.1.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/api v0.121.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
 	google.golang.org/grpc v1.54.0 // indirect
